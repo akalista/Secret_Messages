@@ -31,8 +31,10 @@ class Keyword(Cipher):
 
         list1 = [(ord(x) - 65) for x in user_input]
         list2 = [(" " if x < 0 else (final_alphabet[x])) for x in list1]
+        list3 = ''.join(list2)
+        list3 = self.padding_encrypt(list3)
 
-        return "Your message after encoding is " + ''.join(list2) + "!\n"
+        return "Your message after encoding is " + list3 + "!\n"
 
     def decrypt(self):
         user_input = list(input("What is the message to decode?\n>> ").upper())
@@ -44,5 +46,7 @@ class Keyword(Cipher):
 
         list_ord = [(final.index(x) if x in final else " ") for x in user_input]
         final_word = [(" " if x == " " else (alphabet[x])) for x in list_ord]
+        final_word1 = ''.join(final_word)
+        final_word1 = self.padding_decrypt(final_word1)
 
-        return "Your message after decoding is " + ''.join(final_word) + "!\n"
+        return "Your message after decoding is " + final_word1 + "!\n"

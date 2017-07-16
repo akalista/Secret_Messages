@@ -1,5 +1,6 @@
 from Cipher import Cipher
 
+
 class Affine(Cipher):
     def __init__(self):
         self.alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -57,8 +58,10 @@ class Affine(Cipher):
             new_ords1 = [" " if x == " " else (int(ord(x) - 65)) for x in user_input]
             new_ords2 = [" " if x == " " else (self.__affine_encrypt(key1, key2, x)) for x in new_ords1]
             encrypted = [" " if x == " " else (self.alphabet[x]) for x in new_ords2]
+            encrypted1 = ''.join(encrypted)
+            encrypted1 = self.padding_encrypt(encrypted1)
 
-            return "Your message after encoding is " + ''.join(encrypted) + "!\n"
+            return "Your message after encoding is " + encrypted1 + "!\n"
 
     def decrypt(self):
         user_input = list(input("What is the message to decode?\n>> ").upper())
@@ -86,5 +89,7 @@ class Affine(Cipher):
             new_ords1 = [" " if x == " " else (ord(x) - 65) for x in user_input]
             new_ord2 = [" " if x == " " else (self.__affine_decrypt(mod_inv, key2, int(x))) for x in new_ords1]
             decrypted = [" " if x == " " else (self.alphabet[x]) for x in new_ord2]
+            decrypted1 = ''.join(decrypted)
+            decrypted1 = self.padding_decrypt(decrypted1)
 
-            return "Your code after description is " + ''.join(decrypted) + "!"
+            return "Your code after description is " + decrypted1 + "!\n"
